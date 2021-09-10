@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <audio src="./flyDragon.mp3" id="audioBgm"></audio>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我是蔚蓝色的</title>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+    <script src="https://cdn.jsdelivr.net/gh/yremp/yremp-js@1.5/sakura.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        image-rendering: crisp-edges;
+        /* chrome */
+        image-rendering: pixelated;
+    }
+
+    #grad {
+        border-radius: 20px;
+        background-image: linear-gradient(to bottom right, pink, rgb(126, 80, 187));
+        width: 800px;
+        height: 600px;
+        margin: 0 auto;
+        position: relative;
+        left: 0;
+        top: 20px
+    }
+
+    #typedBox {
+
+        position: absolute;
+        left: 225px;
+        top: 188px;
+        margin: 0 auto;
+
+
+
+    }
+
+    #typed {
+        font-family: fantasy;
+
+        font-size: 30px;
+    }
+
+    #named {
+        float: left;
+        position: absolute;
+        right: 165px;
+        bottom: 88px;
+        font-weight: bold;
+        font-family: serif;
+        font-size: 30px;
+
+    }
+
+    #flyDragon {
+        position: absolute;
+        right: 50px;
+        bottom: 50px;
+        width: 15%;
+    }
+
+    @font-face {
+        font-family: "方正行黑简体";
+        src: url('方正行黑简体.TTF');
+    }
+</style>
+
+<body>
+    <div id="grad">
+        <div id="typedBox">
+            <span id="typed" style="white-space: pre-wrap;line-height: 30px;"></span>
+        </div>
+        <div id="named">kay</div>
+        <img src="./flyDragon.gif" id="flyDragon">
+    </div>
+
+    </div>
+
+</body>
+<script>
+    const options = {
+        strings: [
+
+            '我说  凯\n^1000你要清醒 别再轻易掉眼泪\n是是非非 你要勇敢去面对\n该放就放 别让自己那么累\n无无谓 自由自在的飞 让梦纯粹.^3000',
+            '积极的去给别人留下好印象.^1000',
+        ],
+        typeSpeed: 150, // 打印速度
+        startDelay: 1000, // 开始之前的延迟300毫秒
+        loop: false, // 是否循环
+    };
+    const typed = new Typed('#typed', options);
+</script>
+<script>
+    setTimeout(audioBgm,1);
+    function audioBgm(){
+        document.getElementById('audioBgm').play();
+    }
+</script>
+
+</html>
