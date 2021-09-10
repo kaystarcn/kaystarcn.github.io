@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+    image-rendering: pixelated;
+    /* 像素画不模糊 */
+    image-rendering: crisp-edges;
+    overflow: hidden;
+}
+
+@font-face {
+    font-family: "mingti";
+    src: url("R-PMingLiU-TW-2.ttf");
+}

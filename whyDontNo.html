@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>哒哒嘀嗒^_^田田</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        #container{
+            position: relative;
+            z-index: 0;
+        }
+
+        #jx{
+            transform: rotate(90deg);
+            width: 120px;
+            height: 90px;
+            font-size: 30px;
+            opacity: 0.8;
+            border: solid ;
+            border-radius: 15px;
+            position: absolute;
+            bottom: 30%;
+            left: 40%;
+            display: none;
+            z-index: 99;
+        }
+    </style>
+</head>
+
+<body>
+    
+</video>
+    <div id="container"><video id="t" autoplay controls src="./t.mp4"></video>
+    <button id="jx" onclick="d()">继续</button>
+    </div>
+</body>
+<script>
+    var vision = {
+        x: document.documentElement.clientWidth,
+        y: document.documentElement.clientHeight
+    }
+    var container = document.getElementById("container")
+    var t = document.getElementById("t")
+    container.style.width = vision.x + "px"
+    container.style.height = vision.y + "px"
+    container.style.backgroundColor = "black"
+
+    t.style.width = vision.x + "px"
+    t.style.height = vision.y + "px"
+
+
+    t.addEventListener('ended', function () { //结束
+       document.getElementById("jx").style.display="block"
+    }, false);
+
+
+function d(){
+    window.location.href ="./index.html" 
+}
+</script>
+
+</html>

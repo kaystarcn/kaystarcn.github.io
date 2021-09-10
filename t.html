@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #jx{
+            transform: rotate(90deg);
+            width: 120px;
+            height: 90px;
+            font-size: 30px;
+            opacity: 0.3;
+            border: solid ;
+            border-radius: 15px;
+            position: absolute;
+            bottom: 8%;
+            left: 20%;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container"><video id="t" autoplay  controls></video>
+    <button id="jx" onclick="d()">继续</button>
+    </div>
+</body>
+<script>
+    document.addEventListener("WeixinJSBridgeReady",function(){document.getElementById("t").play()}}
+    
+    var vision = {
+        x: document.documentElement.clientWidth,
+        y: document.documentElement.clientHeight
+    }
+    var container = document.getElementById("container")
+    var t = document.getElementById("t")
+    container.style.width = vision.x + "px"
+    container.style.height = vision.y + "px"
+    container.style.backgroundColor = "black"
+    t.src = "./titanic.mp4"
+    t.style.width = vision.x + "px"
+    t.style.height = vision.y + "px"
+
+
+    t.addEventListener('ended', function () { //结束
+       document.getElementById("jx").style.display="block"
+    }, false);
+
+
+function d(){
+    window.location.href ="./index.html" 
+}
+</script>
+
+</html>

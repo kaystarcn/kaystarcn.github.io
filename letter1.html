@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我找不到童年写的情书</title>
+    <script src="https://cdn.jsdelivr.net/gh/yremp/yremp-js@1.5/sakura.js"></script>
+    <!-- <link rel="stylesheet" href="./index.css"> -->
+    <style>
+        * {
+            image-rendering: pixelated;
+            /* 像素画不模糊 */
+            image-rendering: crisp-edges;
+            overflow: hidden;
+        }
+
+        body {
+            background-color: #3cbcfc;
+        }
+
+        button {
+            height: 30px;
+            border-radius: 10px;
+        }
+
+        #sr {
+            float: right;
+        }
+
+        span {
+            color: blanchedalmond;
+            position: absolute;
+            bottom: 10px;
+            font-size: 10px;
+            text-align: center;
+
+        }
+    </style>
+</head>
+
+<body>
+    <img src="./letter1.png" alt="" width="100%">
+    <img src="./mxd.png" width="100%" alt="">
+    <img src="" alt="">
+    <audio src="./lover.mp3" autoplay></audio>
+    <button id="back" onclick="back()">返回</button>
+    <button id="sr" onclick="choose()">写完不要送人、因为过两天会在操场上捡到</button>
+   
+</body>
+<script>
+    function back() {
+        window.location.href = "./index.html"
+    }
+
+    function choose() {
+        window.location.href = "./Home/index.html"
+    }
+</script>
+
+</html>

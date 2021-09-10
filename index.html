@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编号89757：凯</title>
+    <link rel="stylesheet" href="./index.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/pixi.js/6.1.0-rc.6/browser/pixi.js"></script>
+</head>
+
+<body>
+    <audio src="./yasuo.mp3" autoplay id="yasuo"></audio>
+    <audio src="./yqnyh.mp3" id="yqnyh"></audio>
+
+    <div style="font-family: mingti;font-size: 0;">mark</div>
+</body>
+<script>
+    PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
+    //像素画不模糊
+    PIXI.settings.ROUND_PIXELS = true;
+
+    let vision = {
+        x: document.documentElement.clientWidth,
+        y: document.documentElement.clientHeight
+    }
+    let loader = new PIXI.Loader()
+    let app = new PIXI.Application({
+        width: vision.x,
+        height: vision.y,
+        // backgroundColor:0xE1FFFF
+
+    })
+    loader
+        .add("end", "./end.png")
+        .add("front", "./front.png")
+        .add("middle", "./middle.png")
+        .add("health", "./health.png")
+        .add("letter", "./letter.png")
+        .add("henji", "./henji.png")
+        .add("liuxing", "./liuxing.png")
+        .add("card0", "card/1.png")
+        .add("card1", "card/2.png")
+        .add("card2", "card/0.png")
+
+        .load(init)
+    // console.log(loader.resources.middle1.texture.x)
+    // app.ticker.add(gameLoop(middle))
+    let middle1, middle2, end, front, letter, liuxing, henji, card0, card1, card2, fighter
+    let bgSpeed = 0.2
+    let bgX1 = 0
+    let bgX2 = -vision.x
+    let cardSpeed1 = 1
+    let cardSpeed2 = 2
+    let cardSpeed3 = 3
+    let letterSpeed = 2
+    let liuxingSpeed = 1
+
+    //===========================================
+    document.body.appendChild(app.view)
+
+
+    function init() {
+
+
+
+        end = createSprite(loader.resources.end.texture)
+        liuxing = createLiuxing(loader.resources.liuxing.texture)
+        henji = createLiuxing(loader.resources.henji.texture)
+        middle1 = createSprite(loader.resources.middle.texture)
+        middle2 = createSprite(loader.resources.middle.texture)
+        front = createSprite(loader.resources.front.texture)
+        // card0 = createSprite(loader.resources.card0.texture)
+        // card1 = createSprite(loader.resources.card1.texture)
+        // card2 = createSprite(loader.resources.card2.texture)
+        // card3 = createSprite(loader.resources.card3.texture)
+        // card4 = createSprite(loader.resources.card4.texture)
+        // card5 = createSprite(loader.resources.card5.texture)
+
+        app.ticker.add(gameLoop)
+        middle1.anchor.set(0.5)
+        middle1.anchor.x = 0
+        middle2.anchor.set(0.5)
+        middle2.anchor.x = 0
+        createUI()
+        letter = new PIXI.Sprite.from(loader.resources.letter.texture)
+        posA(letter, 2 * vision.x, -60)
+
+        setTimeout(() => {
+            app.ticker.add(liuxingMove)
+        }, 52000)
+        thing()
+        card0 = createCard(loader.resources.card0.texture, -3)
+        card1 = createCard(loader.resources.card1.texture, -2)
+        card2 = createCard(loader.resources.card2.texture, -(6 / 5))
+
+    }
+
+
+
+    //创建card
+    function createCard(texture, i) {
+        card = new PIXI.Sprite.from(texture)
+        card.anchor.set(0)
+        card.width = vision.x / 3
+        card.height = (vision.x / 3) * 2.2222222222222
+        card.x = vision.x / i
+        card.y = (vision.y / 2) + (end.height / 2)
+        app.stage.addChild(card)
+        return card
+    }
+
+    function thing() {
+        liuxing.interactive = true;
+        liuxing.buttonMode = true;
+        liuxing.on("pointerdown", caiDan)
+    }
+
+    function caiDan() {
+        document.getElementById("yqnyh").play()
+        document.getElementById("yasuo").pause()
+        app.ticker.add(cardMove)
+
+    }
+
+    function cardMove() {
+
+        card0.x += cardSpeed3
+        card1.x += cardSpeed2
+        card2.x += cardSpeed1
+        if (card0.x > vision.x / 3 * 2) {
+            card0.x = vision.x / 3 * 2
+        }
+        if (card1.x > vision.x / 3) {
+            card1.x = vision.x / 3
+        }
+        if (card2.x > 0) {
+            card2.x = 0
+        }
+    }
+
+    function liuxingMove() {
+        liuxing.x += liuxingSpeed
+        liuxing.y += liuxingSpeed / 5
+
+        henji.x += liuxingSpeed
+        henji.y += liuxingSpeed / 5
+
+
+        if (henji.x > 2 * vision.x) {
+            app.stage.removeChild(liuxing)
+            app.stage.removeChild(henji)
+
+        }
+
+    }
+
+    function createLiuxing(texture) {
+        sprite = new PIXI.Sprite.from(texture)
+        sprite.anchor.set(1)
+        sprite.y = vision.y / 2 - (end.height) / 2
+        app.stage.addChild(sprite)
+        return sprite
+    }
+
+    function createUI() {
+        let health = PIXI.Sprite.from(loader.resources.health.texture)
+        health.width = vision.x / 10
+        health.height = vision.x / 10
+        health.x = vision.x / 100
+        health.y = vision.x / 100
+        //  health.anchor.set(0.5)
+
+        let text1 = new PIXI.Text("1、考上本科学校")
+        text1.style = new PIXI.TextStyle({
+            fill: 0xFFF0F5,
+            fontSize: 20,
+            fontFamily: "mingti"
+        })
+        let text2 = new PIXI.Text("2、认识田静怡真的太高兴了！")
+        text2.style = new PIXI.TextStyle({
+            fill: 0xFFF0F5,
+            fontSize: 20,
+            fontFamily: "mingti"
+        })
+        pos(text1, vision.x / 100, vision.x / 6)
+        pos(text2, vision.x / 100, vision.x / 4)
+        //letter
+
+
+        app.stage.addChild(health)
+        app.stage.addChild(text1)
+        app.stage.addChild(text2)
+    }
+
+    function pos(obj, x, y) {
+        obj.x = x
+        obj.y = y
+
+
+    }
+
+    function posA(obj, x, y) {
+        obj.x = x
+        obj.y = y
+        obj.scale.x = 2
+        obj.scale.y = 2
+        // obj.width=vision.x / 5
+        // obj.height=(vision.x / 5)/1.1875
+        obj.anchor.set(0.5)
+        app.stage.addChild(obj)
+        obj.interactive = true;
+        obj.buttonMode = true;
+        obj.on("pointerdown", to3)
+
+    }
+
+    function to3() {
+        window.location.href = "./letter1.html"
+    }
+
+
+
+    function createSprite(texture) {
+        let sprite = new PIXI.Sprite.from(texture)
+        sprite.x = vision.x / 2
+        sprite.y = vision.y / 2
+        sprite.anchor.set(0.5)
+        sprite.width = vision.x
+        sprite.height = vision.x / 1.3818181818182
+
+        // sprite.x = -point
+        app.stage.addChild(sprite)
+
+        return sprite
+    }
+
+
+
+    function gameLoop() {
+        bgX1 += bgSpeed
+        bgX2 += bgSpeed
+        middle1.x = bgX1
+        middle2.x = bgX2
+        if (bgX1 > vision.x) {
+            bgX1 = -vision.x
+        }
+        if (bgX2 > vision.x) {
+            bgX2 = -vision.x
+        }
+        letter.x -= letterSpeed
+        letter.y += letterSpeed
+        if (letter.x < vision.x / 1.3) {
+            letter.x = vision.x / 1.3
+        }
+        if (letter.y > vision.y / 2) {
+            letter.y = vision.y / 2
+        }
+    }
+    // ==========================================原生
+</script>
+
+</html>
