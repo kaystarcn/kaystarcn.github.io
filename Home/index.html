@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天🦄座の幻想</title>
+</head>
+<style>
+    body {
+        background-color: #0070ec;
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        /* firefox */
+        image-rendering: crisp-edges;
+        /* chrome */
+        image-rendering: pixelated;
+
+
+    }
+
+    #container {
+        width: 600px;
+        height: 600px;
+        background-color: #0070ec;
+        margin: 0 auto;
+    }
+
+    #container td {
+
+
+        border: 20px solid #0070ec;
+        background-color: #0070ec;
+        background-image: url(./AvatarFrame.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        -moz-background-size: 100% 100%;
+
+    }
+
+    #container div {
+        width: 105px;
+        height: 105px;
+        background-color: black;
+        margin: 0 auto;
+    }
+</style>
+
+<body background="./kaystar.png">
+    <audio src="./select.mp3" autoplay loop></audio>
+    <audio src="./ButtonAudio.mp3" id="buttonAudio"></audio>
+    <table id="container">
+        <tr>
+            <td>
+                <div id="spark"><img src="spark.png" width="100%"></div>
+            </td>
+            <td>
+                <div id="snake"><img src="snake.png" width="100%"></div>
+            </td>
+            <td>
+                <div id="needle"><img src="needle.png" width="100%"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="hard"><img src="hard.png" width="100%"></div>
+            </td>
+            <td>
+                <div id="me"><img src="me.jpg" width="100%" onclick="hideBody()"></div>
+            </td>
+            <td>
+                <div id="top"><img src="top.png" width="100%"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div id="gemini"><img src="gemini.png" width="100%"></div>
+            </td>
+            <td>
+                <div id="magent"><img src="magent.png" width="100%"></div>
+            </td>
+            <td>
+                <div id="shadow"><img src="shadow.png" width="100%"></div>
+            </td>
+        </tr>
+    </table>
+
+</body>
+<script>
+    //获取所有的头像框
+    let bulb = document.getElementsByTagName('td');
+    let timer = setTimeout("avaEnable(4)", 200);
+    var run = true;
+
+    // ===================================================
+    window.onload = function buttonAudio() {
+
+        let allImg = document.getElementsByTagName('img');
+        //可以动
+        for (num = 0; num <= allImg.length; num++) {
+            allImg[num].index = num;
+            allImg[num].onmouseenter = function () {
+                btnAudio(this.index)
+            }
+        }
+
+    }
+    //蓝灯
+    function ava(num) {
+        if (run) {
+            bulb[num].style.backgroundImage = 'url(./AvatarFrame.png)';
+            let timerAvaEnable = setTimeout('avaEnable(4)', 200);
+        }
+    }
+    //红灯
+    function avaEnable(num) {
+        if (run) {
+            bulb[num].style.backgroundImage = 'url(./AvatarFrameEnable.png)';
+            let timerAva = setTimeout('ava(4)', 200);
+        }
+    }
+
+    function btnAudio(num) {
+
+        document.getElementById('buttonAudio').play();
+        bulb[num].style.backgroundImage = 'url(./AvatarFrameEnable.png)';
+
+        stop();
+        defaultBtn(num)
+
+    }
+
+    function stop() {
+        run = false;
+
+    }
+
+    function defaultBtn(num) {
+
+        for (var numC = 0; numC <= bulb.length - 1; numC++) {
+            console.log(num)
+            if (numC != num) {
+                bulb[numC].style.backgroundImage = 'url(./AvatarFrame.png)';
+
+            }
+
+        }
+    }
+</script>
+<script>
+    function hideBody() {
+        document.getElementsByTagName("table")[0].style.display = "none";
+        createFlyDragon();
+        setTimeout(wait,1500);
+    }
+
+    function createFlyDragon() {
+        var lastDom = document.querySelector("body");
+        var newDom = document.createElement('img');
+        lastDom.appendChild(newDom);
+        newDom.src = './dragonFly.gif';
+        newDom.style.width = "10%";
+        newDom.style.position = "absolute";
+        newDom.style.top = 244 + "px";
+        newDom.style.left = -244 + "px";
+        newDom.id = "flyDragon"
+        setInterval(flyDragonMove, 1);
+    }
+    let s = 0;
+    function flyDragonMove() {
+        var x = 10;
+        s += x;
+        var flyDragon = document.getElementById("flyDragon");
+        flyDragon.style.left = s + 'px';
+        console.log(x);
+        console.log(s);
+    }
+    function wait(){
+        window.location.href="./letter/letter.html"
+    }
+</script>
+
+</html>
